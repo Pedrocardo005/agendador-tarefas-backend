@@ -2,6 +2,7 @@ package com.agendador.tarefas.service;
 
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.agendador.tarefas.models.Tarefa;
@@ -9,13 +10,15 @@ import com.agendador.tarefas.repository.TarefaRepository;
 
 @Service
 public class TarefaService {
-    private TarefaRepository tarefaRepository = new TarefaRepository();
+    
+    @Autowired
+    private TarefaRepository tarefaRepository;
 
     public ArrayList<Tarefa> getAll() {
-        return tarefaRepository.getAll();
+        return (ArrayList<Tarefa>) tarefaRepository.findAll();
     }
 
     public Tarefa create(Tarefa tarefa) {
-        return tarefaRepository.create(tarefa);
+        return tarefaRepository.save(tarefa);
     }
 }
